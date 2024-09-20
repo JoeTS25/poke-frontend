@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:4000";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://poke-backend-y5n5.onrender.com";
 
 class PokeApi {
     static token;

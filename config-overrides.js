@@ -10,6 +10,12 @@ module.exports = function override(config) {
         stream: require.resolve("stream-browserify"),
         vm: require.resolve("vm-browserify"),
     });
+    config.module.rules.push({
+        test: /\.m?js/,
+        resolve: {
+            fullySpecified: false
+        }
+    });
     config.resolve.fallback = fallback;
     config.plugins = (config.plugins || []).concat([
         new webpack.ProvidePlugin({

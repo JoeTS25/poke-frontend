@@ -10,10 +10,8 @@ import "./PokePage.css";
 function PokeDetail() {
     const {name} = useParams();
     const [pokemonData, setPokemonData] = useState([]);
-    const [pokeSpecies, setPokeSpecies] = useState([]);
     const [dex, setDex] = useState([]);
     const currentPoke =`https://pokeapi.co/api/v2/pokemon/${name}`;
-    const currentSpecies = `https://pokeapi.co/api/v2/pokemon-species/${name}`;
     const currentDex = `https://pokeapi.co/api/v2/pokemon-species/${name}`;
     const [isLoading, setIsLoading] = useState(true);
     
@@ -38,15 +36,6 @@ function PokeDetail() {
         setIsLoading(false);
     }
 
-    async function GetSpecies() {
-        setIsLoading(true);
-        const res = await axios.get(currentSpecies);
-        setPokeSpecies(poke => {
-            poke = [...poke, res.data]
-            return poke
-        });
-        setIsLoading(false);
-    }
 
 
     /* The useEffect section */
@@ -59,17 +48,12 @@ function PokeDetail() {
         GetDex();
     }, [currentDex])
 
-    useEffect(() => {
-        GetSpecies();
-    }, [currentSpecies])
-
     
     if (isLoading) return ("Page Loading...")
     
     /* Section of consts after the useEffects have taken place */
     const pokeData = pokemonData[0];
     const dexData = dex[0];
-    const speciesData = pokeSpecies[0];
     const pokeName = pokeData.name;
     const stringHeight = pokeData.height.toString();
     const stringWeight = pokeData.weight.toString();
